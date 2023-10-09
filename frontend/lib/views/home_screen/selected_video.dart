@@ -200,7 +200,7 @@ class _SelectedVideoState extends State<SelectedVideo> {
                         ElevatedButton(
                           onPressed: () {
                             Get.to(
-                              () => EditorScreen(file: widget.videoPath),
+                              () => EditorScreen(file: widget.videoPath, controller: selectVideoController),
                             );
                           },
                           child: Icon(
