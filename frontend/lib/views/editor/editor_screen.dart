@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:video_editor/video_editor.dart';
+import 'package:pro_shorts/get/home_screen/get_select_video.dart';
 
 import 'crop_page.dart';
 import 'export_service.dart';
@@ -47,9 +48,10 @@ class TrimVideo extends StatelessWidget {
 }
 
 class EditorScreen extends StatefulWidget {
-  const EditorScreen({super.key, required this.file});
+  const EditorScreen({super.key, required this.file, required this.controller});
 
   final File file;
+  final SelectVideoController controller;
 
   @override
   State<EditorScreen> createState() => _EditorScreenState();
