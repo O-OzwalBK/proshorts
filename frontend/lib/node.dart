@@ -10,7 +10,7 @@ const Node({ Key? key }) : super(key: key);
   @override
   Widget build(BuildContext context){
     fetchData() async{
-    var url = Uri.parse("http://10.0.2.2:400/users");
+    var url = Uri.parse("http://192.168.101.143/users");
     var response = await http.get(url);
     return jsonDecode(response.body);
   }
