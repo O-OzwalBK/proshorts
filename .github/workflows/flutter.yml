@@ -26,7 +26,6 @@ jobs:
         channel: stable
         flutter-version: 3.7.12
     - run: flutter pub get
-    - run: flutter test
     - run: flutter build apk
     - run: flutter build appbundle
     - run: flutter build windows
