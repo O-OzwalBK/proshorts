@@ -13,7 +13,7 @@ import 'package:pro_shorts/methods/show_snack_bar.dart';
 import 'package:pro_shorts/views/profile/own_profile_screen.dart';
 import 'package:pro_shorts/views/widgets/home_screen/video_details_input.dart';
 import 'package:uuid/uuid.dart';
-import 'package:video_compress/video_compress.dart';
+import 'package:video_compress_zero/video_compress_zero.dart';
 
 List videoCategory = [
   "Web Development",
