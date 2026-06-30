@@ -35,23 +35,20 @@ subprojects {
 }
 subprojects {
     project.evaluationDependsOn(':app')
-}
-subprojects {
-// 3. FORCE OLDER PLUGINS (like export_video_frame) TO COMPILE WITH SDK 33
-    afterEvaluate { project ->
-        if (project.hasProperty("android")) {
-            project.android {
-                compileSdkVersion 33
-                buildToolsVersion "33.0.0"
-                
-                defaultConfig {
-                    targetSdkVersion 33
-                }
+    
+    // Because 'evaluationDependsOn' just finished running, the android extension 
+    // is now fully active. We can safely modify it immediately without 'afterEvaluate'.
+    if (project.hasProperty("android")) {
+        project.android {
+            compileSdkVersion 33
+            buildToolsVersion "33.0.0"
+            
+            defaultConfig {
+                targetSdkVersion 33
             }
         }
     }
 }
-
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
