@@ -9,7 +9,6 @@ import 'package:mailer/smtp_server/gmail.dart';
 import 'package:path/path.dart';
 import 'package:pro_shorts/constants.dart';
 import 'package:pro_shorts/node.dart';
-import 'package:pro_shorts/test.dart';
 import 'package:pro_shorts/views/home_screen/make_notes.dart';
 import 'package:pro_shorts/views/home_screen/search.dart';
 import 'package:pro_shorts/views/home_screen/selected_video.dart';
