@@ -32,9 +32,11 @@ allprojects {
 rootProject.buildDir = '../build'
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
-
+}
+subprojects {
     project.evaluationDependsOn(':app')
-
+}
+subprojects {
 // 3. FORCE OLDER PLUGINS (like export_video_frame) TO COMPILE WITH SDK 33
     afterEvaluate { project ->
         if (project.hasProperty("android")) {
