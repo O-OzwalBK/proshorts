@@ -20,7 +20,11 @@ allprojects {
     }
     configurations.all {
         resolutionStrategy {
-            force 'com.google.android.exoplayer:exoplayer-core:2.13.3'
+            eachDependency { DependencyResolveDetails details ->
+                if (details.requested.group == 'com.google.android.exoplayer') {
+                    details.useVersion '2.18.7'
+                }
+            }
         }
     }
 }

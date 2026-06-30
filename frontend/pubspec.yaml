@@ -119,3 +119,4 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 dependency_overrides:
   permission_handler_html: 0.1.0
+  media_info: ^0.12.0+2
