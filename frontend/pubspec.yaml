@@ -59,7 +59,8 @@ dependencies:
   video_compress: ^3.1.2
   video_editor: ^3.0.0
   fraction: ^4.1.4
-  ffmpeg_kit_flutter_min: ^6.0.3
+  # ffmpeg_kit_flutter_min: ^6.0.3
+  ffmpeg_kit_flutter_new: ^4.3.2
   tapioca: ^1.0.6+1
 
 dev_dependencies:
