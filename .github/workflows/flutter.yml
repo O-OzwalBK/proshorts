@@ -37,9 +37,6 @@ jobs:
       - name: Build App Bundle
         run: flutter build appbundle --release
 
-      - name: Build Windows
-        run: flutter build windows --release
-
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
