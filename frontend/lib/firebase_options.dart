@@ -54,20 +54,19 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDE3sslz4NznjulFs-MFZtQgqliyKRgICs',
-    appId: '1:37800297873:android:b61426e091cd997f9bc630',
-    messagingSenderId: '37800297873',
-    projectId: 'proshorts-a4484',
-    storageBucket: 'proshorts-a4484.appspot.com',
+    apiKey: 'AIzaSyCimlu3vllkI_d6-89OFIrtQWPW9UV8eR8',
+    appId: '1:950777219399:android:b1f00f5f0d304d5ca4a462',
+    messagingSenderId: '950777219399',
+    projectId: 'proshorts-3fe59',
+    storageBucket: 'proshorts-3fe59.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAdtvVOPtnC-wbg1stnwYLjHauaDuEOd7E',
-    appId: '1:37800297873:ios:d6abdf4ccdb9cf9d9bc630',
-    messagingSenderId: '37800297873',
-    projectId: 'proshorts-a4484',
-    storageBucket: 'proshorts-a4484.appspot.com',
-    iosClientId: '37800297873-vd2g3v4lbar7r39pjko70u5nfst01lb8.apps.googleusercontent.com',
+    apiKey: 'AIzaSyAFpHbs6hMJVnfZzlvNJfTndBI3gVsHOKA',
+    appId: '1:950777219399:ios:a1c8aed6e859c562a4a462',
+    messagingSenderId: '950777219399',
+    projectId: 'proshorts-3fe59',
+    storageBucket: 'proshorts-3fe59.firebasestorage.app',
     iosBundleId: 'com.example.proShorts',
   );
 
