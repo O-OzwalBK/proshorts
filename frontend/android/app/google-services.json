@@ -1,36 +1,26 @@
 {
   "project_info": {
-    "project_number": "37800297873",
-    "project_id": "proshorts-a4484",
-    "storage_bucket": "proshorts-a4484.appspot.com"
+    "project_number": "950777219399",
+    "project_id": "proshorts-3fe59",
+    "storage_bucket": "proshorts-3fe59.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:37800297873:android:b61426e091cd997f9bc630",
+        "mobilesdk_app_id": "1:950777219399:android:b1f00f5f0d304d5ca4a462",
         "android_client_info": {
           "package_name": "com.example.pro_shorts"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "37800297873-3pregse65s6s3sptbasbkjr3paqc0re4.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDE3sslz4NznjulFs-MFZtQgqliyKRgICs"
+          "current_key": "AIzaSyCimlu3vllkI_d6-89OFIrtQWPW9UV8eR8"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "37800297873-3pregse65s6s3sptbasbkjr3paqc0re4.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
