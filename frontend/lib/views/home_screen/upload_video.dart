@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:developer' as developer;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:pro_shorts/constants.dart';
 import 'package:pro_shorts/controllers/users.dart';
 import 'package:pro_shorts/controllers/video.dart';
@@ -13,6 +15,7 @@ import 'package:pro_shorts/views/profile/own_profile_screen.dart';
 import 'package:pro_shorts/views/widgets/home_screen/video_details_input.dart';
 import 'package:uuid/uuid.dart';
 import 'package:video_compress/video_compress.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
 
 List videoCategory = [
   "Web Development",
@@ -48,10 +51,30 @@ class _UploadVideoState extends State<UploadVideo> {
   final _formKey = GlobalKey<FormState>();
 
 // generaring thumbnail
-  List frames = [];
+  String? thumbnailFilePath;
+
   Future exportFrames() async {
-    frames = await ExportVideoFrame.exportImage(widget.videoPath.path, 1, 1);
-    print("frames : ${basename(frames[0].path)}");
+    try {
+      // Safely acquire the device's temporary directory
+      final tempDir = await getTemporaryDirectory();
+
+      thumbnailFilePath = await VideoThumbnail.thumbnailFile(
+        video: widget.videoPath.path,
+        thumbnailPath: tempDir.path,
+        imageFormat: ImageFormat.JPEG,
+        quality: 75,
+      );
+
+      if (thumbnailFilePath != null) {
+        developer.log(
+            "Thumbnail generated successfully: ${basename(thumbnailFilePath!)}",
+            name: 'UploadVideo');
+      }
+    } catch (e, stackTrace) {
+      developer.log("Failed to extract video frames",
+          error: e, stackTrace: stackTrace, name: 'UploadVideo');
+      thumbnailFilePath = null;
+    }
   }
 
   late String compressedVideoPath;
@@ -76,18 +99,33 @@ class _UploadVideoState extends State<UploadVideo> {
     }
   }
 
-  Future addVideo(BuildContext context) async {
-    // to show circular bar
-    isVideoUploading = true;
-    setState(() {});
-    // generating thumbnail
+Future addVideo(BuildContext context) async {
+    setState(() {
+      isVideoUploading = true;
+    });
+
     await exportFrames();
-    // compressing video
+
+    // Guard against native extraction failures
+    if (thumbnailFilePath == null) {
+      showSnackBar("Error", "Failed to generate video thumbnail",
+          backgroundColor: Colors.red);
+      setState(() {
+        isVideoUploading = false;
+      });
+      return;
+    }
+
+    // 2. Compress video
     await compressVideo(widget.videoPath.path);
-    // creating unique video name
+
+    // 3. Create unique video and thumbnail names
     String videoPath = "${const Uuid().v1()}${basename(widget.videoPath.path)}";
     String thumbnailName = "${const Uuid().v1()}.jpg";
-    print("video path: $videoPath");
+
+    developer.log("Generated remote video path: $videoPath",
+        name: 'UploadVideo');
+
     Map<String, dynamic> video = {
       "title": titleController.text.trim().toLowerCase(),
       "description": descriptionController.text.trim().toLowerCase(),
@@ -101,14 +139,22 @@ class _UploadVideoState extends State<UploadVideo> {
       "videoPath": videoPath,
       "thumbnailName": thumbnailName
     };
-    Map<String, dynamic> response = await VideoMethods().addVideo(video,
-        File(compressedVideoPath), videoPath, frames[0].path, thumbnailName);
-    print("upload video response: $response");
+
+    // Pass the safely extracted thumbnailFilePath! to your backend method
+    Map<String, dynamic> response = await VideoMethods().addVideo(
+        video,
+        File(compressedVideoPath),
+        videoPath,
+        thumbnailFilePath!,
+        thumbnailName);
+
+    developer.log("Backend upload response: $response", name: 'UploadVideo');
 
     // uploading video information to public_videos and private_videos
     Map<String, dynamic> videoInformation = {
       "videoInformation": response['_id']
     };
+
     if (selectedMode!.toLowerCase() == "public") {
       await UserMethods().editUserArrayField(
           MYPROFILE['_id'], videoInformation, "public_videos");
@@ -116,8 +162,10 @@ class _UploadVideoState extends State<UploadVideo> {
       await UserMethods().editUserArrayField(
           MYPROFILE['_id'], videoInformation, "private_videos");
     }
+
     showSnackBar("Video", "Video Uploaded Successfully",
         backgroundColor: Colors.green);
+
     Navigator.pop(context);
     Navigator.pop(context);
     Navigator.pop(context);
