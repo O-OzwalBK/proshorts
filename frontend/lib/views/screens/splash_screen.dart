@@ -10,8 +10,10 @@ import '../../get/videos/get_all_videos.dart';
 import '../home_screen/home_screen.dart';
 
 const bool skipLogin = bool.fromEnvironment('SKIP_LOGIN', defaultValue: false);
-const String devLoginEmail = String.fromEnvironment('DEV_LOGIN_EMAIL', defaultValue: '');
-const String devLoginPassword = String.fromEnvironment('DEV_LOGIN_PASSWORD', defaultValue: '');
+const String devLoginEmail =
+    String.fromEnvironment('DEV_LOGIN_EMAIL', defaultValue: '');
+const String devLoginPassword =
+    String.fromEnvironment('DEV_LOGIN_PASSWORD', defaultValue: '');
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -26,7 +28,9 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     Timer(const Duration(seconds: 2), () async {
-      if (skipLogin && devLoginEmail.isNotEmpty && devLoginPassword.isNotEmpty) {
+      if (skipLogin &&
+          devLoginEmail.isNotEmpty &&
+          devLoginPassword.isNotEmpty) {
         try {
           await FirebaseAuth.instance.signInWithEmailAndPassword(
             email: devLoginEmail,

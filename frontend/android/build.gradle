@@ -20,7 +20,7 @@ allprojects {
     }
     configurations.all {
         resolutionStrategy {
-            eachDependency { DependencyResolveDetails details ->
+            eachDependency { details ->
                 if (details.requested.group == 'com.google.android.exoplayer') {
                     details.useVersion '2.18.7'
                 }
